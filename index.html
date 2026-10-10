@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$SAMSOL | Power up on Solana</title>
+<meta name="description" content="$SAMSOL is a community-made Solana coin inspired by the world of Samsung electronics.">
+<meta name="theme-color" content="#1428A0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='32' rx='30' ry='18' fill='%231428A0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<!-- Power-on screen -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-in">
+    <div class="boot-logo">SAMSOL</div>
+    <div class="boot-bar"><i></i></div>
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a href="#top" class="logo" aria-label="$SAMSOL home">SAMSOL</a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#price">Price</a>
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#buy">How to buy</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+      <a href="#buy" class="btn btn-primary magnetic" data-buy>Buy $SAMSOL</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="circuit" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="pill" data-in style="--i:0"><span class="dot"></span><span id="heroStatus">Launching on Solana</span></div>
+        <h1 data-in style="--i:1">Power up with $SAMSOL</h1>
+        <p class="lead" data-in style="--i:2"><span id="typed"></span><span class="caret"></span></p>
+
+        <div class="count" id="count" data-in style="--i:3" aria-label="Time until launch">
+          <div class="cell"><b data-u="d">00</b><span>days</span></div>
+          <div class="cell"><b data-u="h">00</b><span>hours</span></div>
+          <div class="cell"><b data-u="m">00</b><span>minutes</span></div>
+          <div class="cell"><b data-u="s">00</b><span>seconds</span></div>
+        </div>
+
+        <div class="actions" data-in style="--i:4">
+          <a class="btn btn-primary magnetic ripple-host" id="buyBtn" data-buy href="#buy">Buy $SAMSOL</a>
+          <button class="btn btn-ghost magnetic" id="copyBtn" type="button">Copy contract</button>
+        </div>
+      </div>
+
+      <div class="chip-wrap" id="chipWrap" data-in style="--i:2" aria-label="Interactive $SAMSOL chip. Click to flip, drag to spin.">
+        <div class="chip" id="chip">
+          <div class="pins pins-h top"></div><div class="pins pins-h bottom"></div>
+          <div class="pins pins-v left"></div><div class="pins pins-v right"></div>
+          <div class="face front">
+            <svg class="traces" viewBox="0 0 200 200" aria-hidden="true">
+              <path d="M0 40H50V70H80"/><path d="M0 100H40V130H70"/><path d="M0 160H60V140"/>
+              <path d="M200 50H150V80H120"/><path d="M200 110H160V140H130"/><path d="M200 170H140V150"/>
+              <path d="M60 0V30H90"/><path d="M110 0V30H140"/><path d="M70 200V170H100"/><path d="M130 200V170H110"/>
+            </svg>
+            <div class="die"><span>SOL</span><small>$SAMSOL</small></div>
+          </div>
+          <div class="face back">
+            <small>Contract</small>
+            <code data-ca-short>Revealed at launch</code>
+            <small class="hint">Click to flip back</small>
+          </div>
+        </div>
+        <p class="chip-hint">Drag to spin. Click to flip.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section class="price" id="price">
+    <div class="wrap">
+      <div class="pcard" data-reveal>
+        <div class="pc-top">
+          <h2 class="pc-title">Price of 1 $SAMSOL</h2>
+          <div class="status" id="statusPill"><span class="dot"></span><span id="statusText">Awaiting launch</span></div>
+        </div>
+
+        <div class="pc-fig skeleton" id="figs">
+          <div class="fig"><small>In US dollars</small><strong id="usd">0.0000</strong></div>
+          <div class="fig"><small>In SOL</small><strong id="sol">0.0000</strong></div>
+          <div class="fig spark-box">
+            <small>Last 24h change <b id="chg">--</b></small>
+            <svg id="spark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path class="flat" d="M0 30H200"/><path class="line" d=""/></svg>
+          </div>
+        </div>
+
+        <div class="conv">
+          <label for="amount">Convert</label>
+          <input id="amount" type="number" inputmode="decimal" min="0" value="1">
+          <span class="conv-unit">$SAMSOL</span>
+          <div class="conv-out"><b id="cUsd">$0.00</b><span>=</span><b id="cSol">0 SOL</b></div>
+          <div class="chips">
+            <button type="button" data-amt="1">1</button>
+            <button type="button" data-amt="1000">1K</button>
+            <button type="button" data-amt="1000000">1M</button>
+            <button type="button" data-amt="10000000">10M</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap about">
+      <div data-reveal>
+        <h2>Built like a device, launched like a coin.</h2>
+        <p class="body">$SAMSOL is a community-made Solana token inspired by Samsung's world of screens, chips and gadgets. Solana gives it fast transactions and low fees. The community brings the tech-loving energy.</p>
+      </div>
+      <dl class="spec spot" data-reveal>
+        <div><dt>Network</dt><dd>Solana</dd></div>
+        <div><dt>Ticker</dt><dd>$SAMSOL</dd></div>
+        <div><dt>Total supply</dt><dd data-count-supply>0</dd></div>
+        <div><dt>Contract</dt><dd class="ca-row"><code data-ca-short>Revealed at launch</code><button type="button" class="mini" data-copy>Copy</button></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- TOKENOMICS -->
+  <section class="section blue" id="tokenomics">
+    <div class="wrap">
+      <h2 data-reveal>Where the supply goes</h2>
+      <div class="toke">
+        <div class="donut-box" data-reveal>
+          <svg viewBox="0 0 200 200" class="donut" id="donut" aria-label="Supply allocation chart"></svg>
+          <div class="donut-mid"><b id="tkPct">0%</b><span id="tkName">Select a slice</span></div>
+        </div>
+        <ul class="legend" id="legend" data-reveal></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO BUY -->
+  <section class="section" id="buy">
+    <div class="wrap">
+      <h2 data-reveal>Four steps from wallet to $SAMSOL</h2>
+      <ol class="steps" data-stagger>
+        <li class="spot"><span class="n">1</span><h3>Set up a wallet</h3><p>Install Phantom or Solflare and store your recovery phrase offline.</p></li>
+        <li class="spot"><span class="n">2</span><h3>Add SOL</h3><p>Buy SOL on an exchange and send it to your wallet address.</p></li>
+        <li class="spot"><span class="n">3</span><h3>Open a Solana swap</h3><p>Go to Jupiter and connect your wallet.</p></li>
+        <li class="spot"><span class="n">4</span><h3>Swap for $SAMSOL</h3><p>Paste the contract address from this page, check it matches, then swap.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section ice" id="roadmap">
+    <div class="wrap">
+      <div class="rm-head" data-reveal>
+        <h2>Roadmap</h2>
+        <p class="drag-hint">Drag sideways. Click a phase to open it.</p>
+      </div>
+    </div>
+    <div class="track" id="track">
+      <article class="phase" aria-expanded="true" tabindex="0"><h3>Power on</h3><div class="more"><div><p>Launch on Solana, open the community channels and publish the contract address.</p></div></div></article>
+      <article class="phase" aria-expanded="false" tabindex="0"><h3>Signal</h3><div class="more"><div><p>Grow the holder base with community events and the first meme drops.</p></div></div></article>
+      <article class="phase" aria-expanded="false" tabindex="0"><h3>Connect</h3><div class="more"><div><p>Apply for tracker listings and team up with other Solana communities.</p></div></div></article>
+      <article class="phase" aria-expanded="false" tabindex="0"><h3>Galaxy</h3><div class="more"><div><p>Collectibles, community votes and whatever the holders build next.</p></div></div></article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap" data-reveal>
+      <h2>Ready when the countdown ends.</h2>
+      <div class="actions">
+        <a class="btn btn-primary magnetic" data-buy href="#buy">Buy $SAMSOL</a>
+        <a class="btn btn-ghost magnetic" data-link="telegram" href="#">Join Telegram</a>
+        <a class="btn btn-ghost magnetic" data-link="x" href="#">Follow on X</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>$SAMSOL is an unofficial, community-made token. It is not affiliated with, endorsed by or sponsored by Samsung Electronics. Crypto assets are volatile. Do your own research. Nothing on this site is financial advice.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
